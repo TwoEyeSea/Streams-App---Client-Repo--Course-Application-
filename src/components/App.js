@@ -1,14 +1,26 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Link, Route } from "react-router-dom";
 
 const PageOne = () => {
-  return <div>PageOne</div>;
+  return (
+    <div>
+      PageOne
+      <br />
+      <Link to="/pagetwo">Navigate to Page two</Link>
+      //when we use a link tag we make use of the "to" prop not an href prop.
+    </div>
+  );
 };
+
 const PageTwo = () => {
   return (
     <div>
       PageTwo
-      <button>click me</button>
+      <br />
+      <Link to="/">
+        {" "}
+        <button>Navigate to Page one</button>
+      </Link>
     </div>
   );
 };
@@ -19,7 +31,7 @@ const App = () => {
       <BrowserRouter>
         <div>
           <Route path="/" exact component={PageOne} />
-          <Route path="/page2" component={PageTwo} />
+          <Route path="/pagetwo" component={PageTwo} />
         </div>
       </BrowserRouter>
     </div>
