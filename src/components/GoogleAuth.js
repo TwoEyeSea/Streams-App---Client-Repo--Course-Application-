@@ -1,5 +1,6 @@
 import React from "react";
-
+import { connect } from "react-redux";
+import { signIn, signOut } from "../actions";
 class GoogleAuth extends React.Component {
   state = { isSignedIn: null };
 
@@ -21,11 +22,12 @@ class GoogleAuth extends React.Component {
     });
   }
 
-  onAuthChange = () => {
-    // This function monitors the user's current authentication status. when paired with the isSignedIn.listen() method...
-    // We can determnine if the the user is currently signed in or not.
-    // *NB* note that we've defind onAuthChange using an arrow function so that its context is bound to the object (or function) that it's being called from.
-    this.setState({ isSignedIn: this.auth.isSignedIn.get() });
+  onAuthChange = (isSignedIn) => {
+    if (isSignedIn) {
+      this.props.signIn();
+    } else {
+      this.props.singOut();
+    }
   };
 
   // SIGN IN AND SIGN OUT HELPER METHODS FOR BUTTON ONCLICK EVENT HANDLERS
@@ -65,4 +67,4 @@ class GoogleAuth extends React.Component {
   }
 }
 
-export default GoogleAuth;
+export default connect(null, { signIn, signOut })(GoogleAuth);
