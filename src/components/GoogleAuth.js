@@ -29,10 +29,10 @@ class GoogleAuth extends React.Component {
   };
 
   // SIGN IN AND SIGN OUT HELPER METHODS FOR BUTTON ONCLICK EVENT HANDLERS
-  onSignIn = () => {
+  onSignInClick = () => {
     this.auth.signIn();
   };
-  onSignOut = () => {
+  onSignOutClick = () => {
     this.auth.signOut();
   };
 
@@ -41,7 +41,7 @@ class GoogleAuth extends React.Component {
       return null;
     } else if (this.state.isSignedIn) {
       return (
-        <button onClick={this.onSignOut} className="ui red google button">
+        <button onClick={this.onSignOutClick} className="ui red google button">
           {/* Note that we don't call onSignOut with any parentheses. 
           If we called onSignOut with parentheses the function will be called immediately as it's rendered on the screen.  */}
           <i className="google icon" />
@@ -50,7 +50,7 @@ class GoogleAuth extends React.Component {
       );
     } else {
       return (
-        <button onClick={this.onSignIn} className="ui green google button">
+        <button onClick={this.onSignInClick} className="ui green google button">
           {/* Note that we don't call onSignIn with any parentheses. 
           If we called onSignOut with parentheses the function will be called immediately as it's rendered on the screen.  */}
           <i className=" google icon" />
