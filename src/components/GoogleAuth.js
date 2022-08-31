@@ -20,10 +20,9 @@ class GoogleAuth extends React.Component {
 
   onAuthChange = (isSignedIn) => {
     if (isSignedIn) {
-      console.log("signing in");
-      this.props.signIn();
+      console.log(this.auth.currentUser.get().getId());
+      this.props.signIn(this.auth.currentUser.get().getId());
     } else {
-      console.log("signing out");
       this.props.signOut();
     }
   };
@@ -33,6 +32,7 @@ class GoogleAuth extends React.Component {
     this.auth.signIn();
   };
   onSignOutClick = () => {
+    console.log(this.props.userId);
     this.auth.signOut();
   };
 
@@ -41,15 +41,12 @@ class GoogleAuth extends React.Component {
       return null;
     } else if (this.props.isSignedIn) {
       return (
-        console.log(this.props.isSignedIn),
-        (
-          <button onClick={this.onSignOutClick} className="ui red google button">
-            {/* Note that we don't call onSignOut with any parentheses. 
+        <button onClick={this.onSignOutClick} className="ui red google button">
+          {/* Note that we don't call onSignOut with any parentheses. 
           If we called onSignOut with parentheses the function will be called immediately as it's rendered on the screen.  */}
-            <i className="google icon" />
-            Sign Out
-          </button>
-        )
+          <i className="google icon" />
+          Sign Out
+        </button>
       );
     } else {
       return (
