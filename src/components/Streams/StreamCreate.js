@@ -1,7 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 class StreamCreate extends React.Component {
-  renderInput({ input, label }) {
+  renderInput({ input, label, meta }) {
     // The renderInput helper method is used to pass JSX to the Field element from the redux-form library.
     // We can destructure the "input" property from formProps.input and call it as a prop within the <input /> element as shown below.
     return (
@@ -10,6 +10,7 @@ class StreamCreate extends React.Component {
         {/* The label prop is destructured within the renderInput function and placed within the <lable></lable> element 
         This will display the string for each label prop as defined within the <Field/> elements below */}
         <input {...input} />
+        <div>{meta.error}</div>
       </div>
     );
     // In most cases when using redux-form we'll return an input element.
@@ -49,6 +50,8 @@ const validate = (formValues) => {
 
 export default reduxForm({
   form: "streamCreate",
+  validate,
 })(StreamCreate);
-// The reduxForm() function has a similar syntax to the connect() function
-// Unlike the connect() funciton which receives multiple arguments, reduxForm() receives a single object and we put different configuration within this object
+// The reduxForm() function has a similar syntax to the connect() function.
+// Unlike the connect() funciton which receives multiple arguments, reduxForm() receives a single object and we put different configuration within this object.
+// We wire the validate helper function up to the form by adding "validate" to the configuration object within the reduxForm() function.
