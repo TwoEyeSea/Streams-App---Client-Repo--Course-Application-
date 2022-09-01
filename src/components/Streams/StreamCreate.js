@@ -14,14 +14,23 @@ class StreamCreate extends React.Component {
     );
     // In most cases when using redux-form we'll return an input element.
   }
+
+  onSubmit(formValues) {
+    console.log(formValues);
+  }
+
   render() {
-    console.log(this.props);
     return (
-      <form className="ui form">
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form">
+        {/* onSubmit={} is the name of the prop that we're pasisng onto the <form> element.
+          this.props.handleSubmit() is a callback function provided to our component by redux-form.
+          Now when the form is submitted the handleSubmit() callback function will receive the event object and automatically call event.preventDefault */}
         <Field name="title" component={this.renderInput} label={"Enter Title"} />
-        {/* Anytime we add a prop to the <Field /> Element that redux-form is NOT familiar with
-        The prop will by default be passed to the renderInput() function. */}
+        {/* Anytime we add a prop to the <Field/> element that redux-form is NOT familiar with
+        The prop will by default be passed to the renderInput() function.
+        We can use this syntax to customize the <Field/> element */}
         <Field name="description" component={this.renderInput} label={"Enter Description"} />
+        <button className="ui button primary">Submit</button>
       </form>
     );
   }
