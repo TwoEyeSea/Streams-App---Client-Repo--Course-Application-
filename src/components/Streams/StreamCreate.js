@@ -32,6 +32,8 @@ class StreamCreate extends React.Component {
   };
 
   onSubmit = (formValues) => {
+    // "formValues" arg is just redux-form convention. The onSubmit function is handled by the redux-form "handleSubmit()" that we get as a prop from the redux-form library
+    // the arg we specify in the onSubmit funciton can be used to pass the input/values from our field elements to the createStream action creator.
     this.props.createStream(formValues);
   };
 
