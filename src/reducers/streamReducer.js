@@ -3,6 +3,9 @@ import _ from "lodash";
 
 export default (state = {}, action) => {
   switch (action.type) {
+    case FETCH_STREAMS:
+      return { ...state, ..._.mapKeys(action.payload, "id") };
+    // we're using the first spread function to add the current state to a new object and the second spread function to add the new _.mapKeys object.
     case FETCH_STREAM:
       return { ...state, [action.payload.id]: action.payload };
     case CREATE_STREAM:
