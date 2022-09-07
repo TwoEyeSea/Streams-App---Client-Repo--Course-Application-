@@ -16,9 +16,12 @@ export const signOut = () => {
   };
 };
 
-export const createStream = (formValues) => async (dispatch) => {
-  const response = await streams.post("/streams", formValues);
+export const createStream = (formValues) => async (dispatch, getState) => {
+  const { userId } = getState().auth;
+
+  const response = await streams.post("/streams", { ...formValues, userId });
   // The .post() request is a RESTful convention, we're making a post request to '/streams' with our formValues data.
+  // We're posting an object that consists of the formValues data and the userId data using ES15 syntax
 
   dispatch({ type: CREATE_STREAM, payload: response.data });
   // we give the payload a value of response.data because we only care about the information from the request
