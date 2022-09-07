@@ -1,7 +1,7 @@
-import { SIGN_IN, SIGN_OUT, FETCH_STREAMS, DELETE_STREAM, CREATE_STREAM, EDIT_STREAM, FETCH_STREAM } from "./types";
-
 import streams from "../apis/streams";
+import { SIGN_IN, SIGN_OUT, FETCH_STREAMS, DELETE_STREAM, CREATE_STREAM, EDIT_STREAM, FETCH_STREAM } from "./types";
 // imported the variables from the ./types dir to reduce the chances of making transcription typos when defining types.
+import history from "../history";
 
 export const signIn = (userId) => {
   return {
@@ -27,8 +27,8 @@ export const createStream = (formValues) => async (dispatch, getState) => {
   // we give the payload a value of response.data because we only care about the information from the request
   // In this case, response.data will contain information on the title and description of a stream.
 
-  // PROGRAMATIC NAVIGATION TO GET THE USER BACK TOT HE ROOT ROUTE.
-  //  We want to trigger navigation from our createStream action creator but only after we successfully receive a response from the api.
+  history.push("/");
+  //"push" is the method we call to navigate the user around. We call push and then specify the path we want the user to go to.
 };
 
 export const fetchStreams = () => async (dispatch) => {
