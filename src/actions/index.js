@@ -26,6 +26,9 @@ export const createStream = (formValues) => async (dispatch, getState) => {
   dispatch({ type: CREATE_STREAM, payload: response.data });
   // we give the payload a value of response.data because we only care about the information from the request
   // In this case, response.data will contain information on the title and description of a stream.
+
+  // PROGRAMATIC NAVIGATION TO GET THE USER BACK TOT HE ROOT ROUTE.
+  //  We want to trigger navigation from our createStream action creator but only after we successfully receive a response from the api.
 };
 
 export const fetchStreams = () => async (dispatch) => {
