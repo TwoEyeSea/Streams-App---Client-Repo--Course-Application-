@@ -18,6 +18,8 @@ const App = () => {
           <Route path="/" exact component={StreamList} />
           <Route path="/streams/new" component={StreamCreate} />
           <Route path="/streams/edit/:id" component={StreamEdit} />
+          {/* Wildcard variable - anything after the colon is treated as a variable and we can specify any number of these wildcard variables
+          e.g "/streams/edit/:id/:genre/:horror" */}
           <Route path="/streams/delete/:id" component={StreamDelete} />
           <Route path="/streams/show/:id" component={StreamShow} />
         </div>

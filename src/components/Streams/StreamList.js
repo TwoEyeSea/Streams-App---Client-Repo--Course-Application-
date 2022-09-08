@@ -11,7 +11,9 @@ class StreamList extends React.Component {
   renderAdmin = (stream) => {
     // Helper function to provide the logic necessary to determine if the delete and edit buttons should be displayed for a given stream.
     // If the stream's userId state === currentUserId state we'll render the administrative buttons.
-    if (stream.userId === this.props.currentUserId) {
+    if (!stream.userId) {
+      return;
+    } else if (stream.userId === this.props.currentUserId) {
       return (
         <div className="right floated content">
           <Link className="ui button primary" to={`/streams/edit/${stream.id}`}>
@@ -23,6 +25,7 @@ class StreamList extends React.Component {
         </div>
       );
     }
+    return;
   };
 
   renderList() {

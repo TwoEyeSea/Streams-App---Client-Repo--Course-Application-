@@ -38,13 +38,13 @@ export const fetchStreams = () => async (dispatch) => {
 };
 
 export const fetchStream = (streamId) => async (dispatch) => {
-  const response = await streams.get(`/streams/:${streamId}`);
+  const response = await streams.get(`/streams/${streamId}`);
 
   dispatch({ type: FETCH_STREAM, payload: response.data });
 };
 
 export const editStreams = (streamId, formValues) => async (dispatch) => {
-  const response = await streams.put(`/streams/:${streamId}`, formValues);
+  const response = await streams.put(`/streams/${streamId}`, formValues);
   // To modify a record we need the ID of individual stream we want to modify/update and the actual updates we intend on making to the stream.
   // We pass the streamId and the formValues terms as arges to the action creator.
 
@@ -52,7 +52,7 @@ export const editStreams = (streamId, formValues) => async (dispatch) => {
 };
 
 export const deleteStreams = (streamId) => async (dispatch) => {
-  await streams.delete(`/streams/:${streamId}`);
+  await streams.delete(`/streams/${streamId}`);
 
   dispatch({ type: DELETE_STREAM, payload: streamId });
 };
