@@ -43,8 +43,9 @@ export const fetchStream = (streamId) => async (dispatch) => {
   dispatch({ type: FETCH_STREAM, payload: response.data });
 };
 
-export const editStream = (streamId, formValues) => async (dispatch) => {
-  const response = await streams.put(`/streams/${streamId}`, formValues);
+export const editStream = (streamId, formValues) => async (dispatch, getState) => {
+  const { userId } = getState().auth;
+  const response = await streams.put(`/streams/${streamId}`, { ...formValues, userId });
   // To modify a record we need the ID of individual stream we want to modify/update and the actual updates we intend on making to the stream.
   // We pass the streamId and the formValues terms as arges to the action creator.
 
