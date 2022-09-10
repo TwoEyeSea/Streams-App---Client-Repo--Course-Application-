@@ -45,9 +45,10 @@ export const fetchStream = (streamId) => async (dispatch) => {
 
 export const editStream = (streamId, formValues) => async (dispatch, getState) => {
   const { userId } = getState().auth;
-  const response = await streams.put(`/streams/${streamId}`, { ...formValues, userId });
-  // To modify a record we need the ID of individual stream we want to modify/update and the actual updates we intend on making to the stream.
-  // We pass the streamId and the formValues terms as arges to the action creator.
+  const response = await streams.patch(`/streams/${streamId}`, formValues);
+  // The previous Solution to ensure that the userId is dispatched to the object was too hacky,
+  // a "put" request updates ALL properties of a target record which is too destructive for what we're trying to accomplish as properties that aren't specified in the new request are delete.
+  // a "patch" request only updates SOME of the properties of a target record. The modified properties are the terms specified within the request. The patch request does not modify unspecified properties.
 
   dispatch({ type: EDIT_STREAM, payload: response.data });
   history.push("/");
