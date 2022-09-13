@@ -7,7 +7,7 @@ class StreamList extends React.Component {
   componentDidMount() {
     this.props.fetchStreams();
   }
-
+  // Helper Function - Edit and Delete Buttons
   renderAdmin = (stream) => {
     // Helper function to provide the logic necessary to determine if the delete and edit buttons should be displayed for a given stream.
     // If the stream's userId state === currentUserId state we'll render the administrative buttons.
@@ -37,8 +37,10 @@ class StreamList extends React.Component {
           {/* Helper function containing logic to determine if admin buttons should be rendered for a given stream (based on userId) */}
           <i className="large middle aligned icon camera" />
           <div className="content">
-            {stream.title}
-            <div className="description"> {stream.description}</div>
+            <Link to={`/streams/show/${stream.id}`}>
+              {stream.title}
+              <div className="description"> {stream.description}</div>
+            </Link>
           </div>
         </div>
       );
