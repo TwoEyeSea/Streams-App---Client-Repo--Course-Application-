@@ -9,9 +9,18 @@ class StreamShow extends React.Component {
     this.videoRef = React.createRef();
     // In order to define a reference we need to call the constructor method and define the ref on the super ref.
   }
+
   componentDidMount() {
-    this.props.fetchStream(this.props.match.params.id);
+    const { id } = this.props.match.params.id;
+    this.props.fetchStream(id);
+    this.player = flv.createPlayer({
+      type: "flv",
+      url: `http://localhost:8000/live/${id}.flv`,
+    });
+    this.player.attachMediaElement(this.videoRef.current);
+    this.player.load();
   }
+
   render() {
     if (!this.props.stream) {
       return <div>Loading...</div>;
