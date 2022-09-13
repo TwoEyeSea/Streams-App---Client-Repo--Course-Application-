@@ -11,6 +11,8 @@ import _ from "lodash";
 class StreamEdit extends React.Component {
   componentDidMount() {
     this.props.fetchStream(this.props.match.params.id);
+    //Since our components are being rendered by Route elements from React-Router-Dom, our components are automatically passed React-Router-Dom specific props.
+    // Among the props received is the "match" prop which provides us with our stream ID which we've defined on the URL using wildcard colon variables
   }
 
   onSubmit = (formValues) => {
