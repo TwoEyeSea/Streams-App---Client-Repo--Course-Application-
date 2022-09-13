@@ -37,7 +37,7 @@ class StreamList extends React.Component {
           {/* Helper function containing logic to determine if admin buttons should be rendered for a given stream (based on userId) */}
           <i className="large middle aligned icon camera" />
           <div className="content">
-            <Link to={`/streams/show/${stream.id}`}>
+            <Link to={`/streams/${stream.id}`}>
               {stream.title}
               <div className="description"> {stream.description}</div>
             </Link>
