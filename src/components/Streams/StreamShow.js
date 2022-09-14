@@ -11,8 +11,26 @@ class StreamShow extends React.Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params.id;
+    const id = this.props.match.params.id;
     this.props.fetchStream(id);
+    this.buildPlayer();
+  }
+
+  componentDidUpdate() {
+    console.log(this.videoRef);
+    this.buildPlayer();
+    //Provided that we fetch a stream and update/re-render our state the componentDidUpdate lifecycle method will call this.buildPlayer().
+    // This allows us to delay the buildPlayer function until after the stream is fetched and the application re-renders.
+  }
+
+  // Helper function that allows the application to wait until we've fetched a stream
+  buildPlayer() {
+    if (this.player || !this.props.stream) {
+      // if we already have a player object or the stream hasn't been fetched as yet we'll return early
+      // Otherwise we will proceed to build the video player.
+      return;
+    }
+    const { id } = this.props.match.params.id;
     this.player = flv.createPlayer({
       type: "flv",
       url: `http://localhost:8000/live/${id}.flv`,
@@ -25,6 +43,7 @@ class StreamShow extends React.Component {
     if (!this.props.stream) {
       return <div>Loading...</div>;
     }
+
     const { title, description } = this.props.stream;
     return (
       <div>
