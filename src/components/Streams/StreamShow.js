@@ -11,7 +11,7 @@ class StreamShow extends React.Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id;
+    const { id } = this.props.match.params;
     this.props.fetchStream(id);
     this.buildPlayer();
   }
@@ -23,6 +23,12 @@ class StreamShow extends React.Component {
     // This allows us to delay the buildPlayer function until after the stream is fetched and the application re-renders.
   }
 
+  componentWillUnmount() {
+    // This lifecycle method is usefull for handling cleanup when our applicaiton finishes rendering.
+    this.player.destroy();
+    console.log("I was unmounted");
+  }
+
   // Helper function that allows the application to wait until we've fetched a stream
   buildPlayer() {
     if (this.player || !this.props.stream) {
@@ -30,7 +36,9 @@ class StreamShow extends React.Component {
       // Otherwise we will proceed to build the video player.
       return;
     }
-    const { id } = this.props.match.params.id;
+
+    const { id } = this.props.match.params;
+
     this.player = flv.createPlayer({
       type: "flv",
       url: `http://localhost:8000/live/${id}.flv`,
